@@ -1,39 +1,27 @@
 package rentcar.carro.service;
 
-import rentcar.carro.dto.Response;
+import java.util.List;
+
+import rentcar.carro.dto.*;
+import rentcar.carro.entities.*;
 
 public interface ICarroService {
-
-    Response addCar();
-
-    Response updateCar();
-
-    Response deleteCar();
-
-    Response getCarById();
-
-    Response ownerGetCarById();
-
-    Response ownerGetBookedPeriodsByCarId();
-
-    Response searchWithoutFiltres ();
-
-    Response serachWithFiltres();
-
-    Response makeReservation();
-
-    Response confirmPayment();
-
-    Response bestBooked();
-
-    Response latestComments();
-
-    Response postComment();
-
-    Response getFiltres();
-
-
-
-
+	Car addCar(Car car);
+	
+	Car updateCar(CarDto car);
+	
+	void deleteCar(String regNumber);
+	
+	Car getCar(String regNumber);
+	
+	List<Car> findBy(SearchCriteriaDto searchData);
+	
+	BookingResultDto makeReservation(BookingDataDto bookingData);
+	
+	void confirmPayment(ConfirmPaymentDto confirm);
+	
+	void addCarComment(Comment comment);
+	
+	List<Comment> getCarComments(String regNumber);
 
 }
