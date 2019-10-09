@@ -23,4 +23,5 @@ public interface ICarroService {
 	void addCarComment(Comment comment);
 	
 	List<Comment> getCarComments(String regNumber);
+
 }
