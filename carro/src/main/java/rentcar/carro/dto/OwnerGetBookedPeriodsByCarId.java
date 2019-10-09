@@ -1,4 +1,4 @@
-package rentcar.carro;
+package rentcar.carro.dto;
 
 import lombok.*;
 import rentcar.carro.dto.PersonWhoBookdDto;
