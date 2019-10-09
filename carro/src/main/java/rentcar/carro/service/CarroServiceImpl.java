@@ -10,6 +10,7 @@ public class CarroServiceImpl implements ICarroService {
 
     private String currentDate = LocalDateTime.now().toLocalDate().toString();
 
+
     @Override
     public Response addCar() {
         return null;
@@ -41,12 +42,42 @@ public class CarroServiceImpl implements ICarroService {
     }
 
     @Override
-    public Response searchCarByPlaceAndStartEndDates() {
+    public Response searchWithoutFiltres() {
+        return null;
+    }
+
+    @Override
+    public Response serachWithFiltres() {
         return null;
     }
 
     @Override
     public Response makeReservation() {
+        return null;
+    }
+
+    @Override
+    public Response confirmPayment() {
+        return null;
+    }
+
+    @Override
+    public Response bestBooked() {
+        return null;
+    }
+
+    @Override
+    public Response latestComments() {
+        return null;
+    }
+
+    @Override
+    public Response postComment() {
+        return null;
+    }
+
+    @Override
+    public Response getFiltres() {
         return null;
     }
 }

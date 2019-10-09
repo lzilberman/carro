@@ -16,8 +16,24 @@ public interface ICarroService {
 
     Response ownerGetBookedPeriodsByCarId();
 
-    Response searchCarByPlaceAndStartEndDates ();
+    Response searchWithoutFiltres ();
+
+    Response serachWithFiltres();
 
     Response makeReservation();
+
+    Response confirmPayment();
+
+    Response bestBooked();
+
+    Response latestComments();
+
+    Response postComment();
+
+    Response getFiltres();
+
+
+
+
 
 }
