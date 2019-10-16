@@ -22,4 +22,6 @@ public class Location {
 	Integer apartment;
 	Integer zipcode;
 	
+	Double latitude;
+	Double longitude;
 }

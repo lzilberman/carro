@@ -8,9 +8,9 @@ import lombok.*;
 @Getter
 @ToString
 public class BookingResultDto {
-	// make reservetion
+
 	String carNumber;
-	String orderNumber;
+	Long orderNumber;
 	Long bookingDateTime;
 	Double amount;
 }

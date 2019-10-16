@@ -7,12 +7,11 @@ import lombok.*;
 @Setter
 @Getter
 @ToString
+@Builder
 public class BookingDataDto {
-	// makeReservation
 	String carNumber;
-	
 	Long startDateTime;
 	Long endDateTime;
-	Long bookingDateTime;
-	String user; // User user	
+	
+	String user; 
 }
