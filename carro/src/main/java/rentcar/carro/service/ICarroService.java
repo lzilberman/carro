@@ -6,22 +6,24 @@ import rentcar.carro.dto.*;
 import rentcar.carro.entities.*;
 
 public interface ICarroService {
-	Car addCar(Car car);
+	Car addCar(CarDto car);
 	
-	Car updateCar(CarDto car);
+	Car updateCar(UpdateCarDto car);
 	
 	void deleteCar(String regNumber);
 	
 	Car getCar(String regNumber);
 	
-	List<Car> findBy(SearchCriteriaDto searchData);
-	
+	List<Booking> getCarBookings(String regNumber); 
+		
 	BookingResultDto makeReservation(BookingDataDto bookingData);
 	
 	void confirmPayment(ConfirmPaymentDto confirm);
 	
+	List<Car> findBy(SearchCriteriaDto searchData);
+	
 	void addCarComment(Comment comment);
 	
 	List<Comment> getCarComments(String regNumber);
-
+    CarRatingDto getCarRating(String regNumber);
 }

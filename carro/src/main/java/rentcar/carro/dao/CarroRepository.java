@@ -1,5 +1,10 @@
 package rentcar.carro.dao;
 
-public class CarroRepository {
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+import rentcar.carro.entities.Car;
+@Repository
+public interface CarroRepository extends MongoRepository<Car, String> {
 
 }

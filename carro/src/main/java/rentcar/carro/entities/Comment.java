@@ -11,6 +11,7 @@ import lombok.*;
 @Setter
 @Getter
 @ToString
+@Builder
 public class Comment {
 	String carNumber;
 	String firstName;
@@ -19,4 +20,13 @@ public class Comment {
 	LocalDate postDate;
 	String post;
 	Integer rating;
+	
+	public Comment(String carNumber, String firstName, String lastName, LocalDate postDate, String post) {
+		this.carNumber = carNumber;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.postDate = postDate;
+		this.post = post;
+	}
+		
 }

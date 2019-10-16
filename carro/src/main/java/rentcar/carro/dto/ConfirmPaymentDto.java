@@ -5,10 +5,20 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
-@Getter
 @ToString
 public class ConfirmPaymentDto {
+
 	String carNumber;
-	String orderNumber;
-	Boolean paymentConfirmed;
+	Long orderNumber;
+	boolean paymentConfirmed;
+	
+	public String getCarNumber() {
+		return carNumber;
+	}
+	public Long getOrderNumber() {
+		return orderNumber;
+	}
+	public boolean isPaymentConfirmed() {
+		return paymentConfirmed;
+	}	
 }
