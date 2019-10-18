@@ -21,6 +21,7 @@ public interface ICarroService {
 	void confirmPayment(ConfirmPaymentDto confirm);
 	
 	List<Car> findBy(SearchCriteriaDto searchData);
+	List<String> getMakeModels(String make);
 	
 	void addCarComment(Comment comment);
 	

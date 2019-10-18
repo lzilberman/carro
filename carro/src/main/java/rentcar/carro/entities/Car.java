@@ -73,7 +73,7 @@ public class Car {
 		    }
 		    boolean[] res = {true};
 		    
-		    List<Range<Long>> carRanges = bookings.stream()
+		    bookings.stream()
 		    		.filter(b->b.getEndDateTime().compareTo(nowTime) >= 0)
 		            .map(b->b.getBookingRange())
 		            .peek(range -> {if (range.isConnected(period)) res[0] = false;})
@@ -87,9 +87,10 @@ public class Car {
 	  }
 	  public BookingResultDto getBookingResult(Booking booking) {
 		  Long[] orderNumber = {0L};
-		  bookings.stream().filter(b->b.getStartDateTime().equals(booking.getStartDateTime()))
-		  .peek(b -> orderNumber[0] = b.getOrderNumber())
-		  .collect(Collectors.toList());
+		  bookings.stream()
+				  .filter(b->b.getStartDateTime().equals(booking.getStartDateTime()))
+				  .peek(b -> orderNumber[0] = b.getOrderNumber())
+				  .collect(Collectors.toList());
 
 		  BookingResultDto res = new BookingResultDto(regNumber, orderNumber[0], booking.getBookingDateTime(), booking.getAmount());
 		  return res;
@@ -117,7 +118,7 @@ public class Car {
 		  .mapToInt(c->c.rating)
 		  .reduce(0, (result, current)-> result+current);
 		  
-		  return new CarRatingDto(Math.round(total/count[0]), count[0] );
+		  return count[0]==0? null : new CarRatingDto(Math.round(total/count[0]), count[0] );
 	  }
 	  
 	  @Id
@@ -132,7 +133,7 @@ public class Car {
 	  String make;
 	  String model;
 	  Integer year;
-	  String engine;
+	  Double engine;
 	  String fuel;
 	  String transmission;
 	  String wheelsDrive;
