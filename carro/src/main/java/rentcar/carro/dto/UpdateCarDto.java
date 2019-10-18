@@ -9,11 +9,17 @@ import rentcar.carro.entities.Location;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @Builder
 @ToString
 public class UpdateCarDto {
 	
-	  @Id
+	  public UpdateCarDto(String regNumber, String hostCity) {
+		this.regNumber = regNumber;
+		this.hostCity = hostCity;
+	}
+
+	@Id
 	  String regNumber;
 //	  String owner; //email OR User owner
 	  

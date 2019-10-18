@@ -2,6 +2,7 @@ package rentcar.carro.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -27,26 +28,34 @@ public class CarroServiceImpl implements ICarroService {
 	}
 
 	@Override
-	public Car updateCar(UpdateCarDto dto) {
-		if(dto == null) return null;
-		Car car = mongoOperations.findById(dto.getRegNumber(), Car.class);
-		if(car == null) return null;
+	public Car updateCar(UpdateCarDto updateData) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("regNumber").is(updateData.getRegNumber()));
 		
-		String newHostCity = dto.getHostCity();
-		Location newLocation = dto.getLocation();
-		String [] newFeatures = dto.getFeatures();
-		Integer newDayPrice = dto.getDayPrice();
-		Double newDistanceIncluded = dto.getDistanceIncluded();
-		String [] newImageUrl = dto.getImageUrl();
+		Update update = new Update();
+		update = updateData.getHostCity() == null? update : 
+			update.set("hostCity", updateData.getHostCity() ); 
 		
-		if(newHostCity != null) car.setHostCity(newHostCity);
-		if(newLocation != null) car.setLocation(newLocation);
-		if(newFeatures != null) car.setFeatures(newFeatures);
-		if(newDayPrice != null) car.setDayPrice(newDayPrice);
-		if(newDistanceIncluded != null) car.setDistanceIncluded(newDistanceIncluded);
-		if(newImageUrl != null) car.setImageUrl(newImageUrl);
+		update = updateData.getLocation() == null? update : 
+			update.set("location", updateData.getLocation() ); 
+//=================================
+//		update = updateData.getLocation().getPoint() == null? update : 
+//			update.set("location.point", updateData.getLocation().getPoint() ); 		
+//=================================		
+		update = updateData.getFeatures() == null? update : 
+			update.set("features", updateData.getFeatures() ); 
 		
-		return mongoOperations.save(car);
+		update = updateData.getDayPrice() == null? update : 
+			update.set("dayPrice", updateData.getDayPrice() ); 
+		
+		update = updateData.getDistanceIncluded() == null? update : 
+			update.set("distanceIncluded", updateData.getDistanceIncluded() ); 
+		
+		update = updateData.getImageUrl() == null? update : 
+			update.set("imageUrl", updateData.getImageUrl() ); 
+		
+		mongoOperations.upsert(query, update, Car.class);	
+		return mongoOperations.findById(updateData.getRegNumber(), Car.class);
 	}
 
 	@Override
@@ -101,7 +110,49 @@ public class CarroServiceImpl implements ICarroService {
 	}
 
 	@Override
-	public List<Car> findBy(SearchCriteriaDto searchData) {
+	public List<Car> findBy(SearchCriteriaDto searchData) {		
+        Query query = new Query();
+        
+        query = searchData.getCity() == null? query : 
+        	query.addCriteria(Criteria.where("hostCity").is(searchData.getCity())); 
+        
+        query = searchData.getMinPrice() == null? query : 
+        	query.addCriteria(Criteria.where("dayPrice").lte(searchData.getMaxPrice()).gte(searchData.getMinPrice())); 
+        
+        query = searchData.getSortByPriceDirection() == null? query : 
+        	query.with(new Sort(searchData.getSortByPriceDirection(), "dayPrice")); 
+
+        query = searchData.getMake() == null? query : 
+        	query.addCriteria(Criteria.where("make").is(searchData.getMake())); 
+        
+        query = searchData.getModel() == null? query : 
+        	query.addCriteria(Criteria.where("model").is(searchData.getModel())); 
+        
+        query = searchData.getMinYear() == null? query : 
+        	query.addCriteria(Criteria.where("year").lte(searchData.getMaxYear()).gte(searchData.getMinYear())); 
+        
+        query = searchData.getMinEngineVolume() == null? query : 
+        	query.addCriteria(Criteria.where("engine").lte(searchData.getMaxEngineVolume()).gte(searchData.getMinEngineVolume())); 
+        
+        query = searchData.getFuel() == null? query : 
+        	query.addCriteria(Criteria.where("fuel").is(searchData.getFuel())); 
+        
+        query = searchData.getTransmission() == null? query : 
+        	query.addCriteria(Criteria.where("transmission").is(searchData.getTransmission())); 
+        
+        query = searchData.getWheelsDrive() == null? query : 
+        	query.addCriteria(Criteria.where("wheelsDrive").is(searchData.getWheelsDrive())); 
+        
+        query = searchData.getMinFuelConsumption() == null? query : 
+        	query.addCriteria(Criteria.where("fuelConsumption").lte(searchData.getMaxFuelConsumption()).gte(searchData.getMinFuelConsumption())); 
+        
+//        query = searchData.getCity() == null? query : query.addCriteria(Criteria.where("hostCity").is(searchData.getCity())); 
+        
+        return mongoOperations.find(query, Car.class);
+	}
+	
+	@Override
+	public List<String> getMakeModels(String make) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -123,5 +174,5 @@ public class CarroServiceImpl implements ICarroService {
 	public CarRatingDto getCarRating(String regNumber) {
 		return getCar(regNumber).getCarRating();
 	}
-  
+
 }

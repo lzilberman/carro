@@ -1,11 +1,13 @@
 package rentcar.carro.entities;
 
+import org.springframework.data.geo.Point;
+
 import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
 @Getter
+@Setter
 @Builder
 @ToString
 public class Location {
@@ -24,4 +26,5 @@ public class Location {
 	
 	Double latitude;
 	Double longitude;
+	Point point;  // [ longitude, latitude ]
 }

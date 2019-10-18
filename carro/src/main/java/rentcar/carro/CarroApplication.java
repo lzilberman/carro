@@ -4,15 +4,16 @@ package rentcar.carro;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.lang.Boolean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.geo.Point;
 
-import rentcar.carro.dto.BookingDataDto;
-import rentcar.carro.dto.BookingResultDto;
-import rentcar.carro.dto.ConfirmPaymentDto;
+import rentcar.carro.dto.*;
 import rentcar.carro.service.ICarroService;
 import rentcar.carro.entities.*;
 
@@ -28,8 +29,63 @@ public class CarroApplication implements CommandLineRunner  {
 	@Override
 	public void run(String... args) throws Exception {
 
-		System.out.println(carroService.getCarRating("66-666-66")); 
+//=============================================================		
+//		SearchCriteriaDto sdata = new SearchCriteriaDto("city6", null, null);
+//		SearchCriteriaDto sdata = new SearchCriteriaDto(null, null, null);
 		
+//		sdata.setMinPrice(35);
+//		sdata.setMaxPrice(50);
+//		sdata.setSortByPriceDirection(Sort.Direction.DESC);
+//		sdata.setMake("maker6");	
+//		sdata.setMinYear(2000);
+//		sdata.setMaxYear(2018);
+//		sdata.setMinEngineVolume(1.8);
+//		sdata.setMaxEngineVolume(2.0);
+//		sdata.setMinFuelConsumption(10.0);
+//		sdata.setMaxFuelConsumption(14.0);
+		
+//		List<Car> cars = carroService.findBy(sdata);
+//		cars.forEach(System.out::println);
+//=============================================================		
+//		Location location6 = new Location("city6", "street6", 6);
+//		location6.setCountry("Israel");
+//		location6.setLatitude(31.912363);
+//		location6.setLongitude(34.8047923);
+		//===============
+		//Location location62 = new Location();
+		//location62.setPoint(new Point(34.798892, 31.957992));
+		//================
+//		Location location7 = new Location("city7", "street7", 7);
+//		location7.setCountry("Israel");
+//		location7.setLatitude(31.961308);
+//		location7.setLongitude(34.801483);
+		
+//		String[] features6 = {"Reverse Camera", "Touch Screen Menu", "Side Camera"}; 
+//		String[] features7 = {"Super", "Puper", "Features"}; 
+//		String[] features6 = {"Automatic transmission", "Audio input", "Bluetooth"}; 
+//		String[] features7 = {"GPS", "Must be 25+ to book", "Heated seats"}; 
+
+//		UpdateCarDto updateData6 = new UpdateCarDto("66-666-66", "city6");
+//		updateData6.setLocation(location6);
+//		updateData6.setFeatures(features6);
+		//=======================
+		//UpdateCarDto updateData62 = new UpdateCarDto("62-666-62", "city6");
+		//updateData62.setLocation(location62);
+		//=======================
+//		UpdateCarDto updateData7 = new UpdateCarDto("77-777-77", "city7");
+//		updateData7.setLocation(location7);
+//		updateData7.setFeatures(features7);
+		
+//		Car car6 = carroService.updateCar(updateData6);
+//		System.out.println(car6);
+//		Car car7 = carroService.updateCar(updateData7);
+//		System.out.println(car7);	
+		//====================
+		//Car car62 = carroService.updateCar(updateData62);
+		//System.out.println(car62);
+		//====================
+//=============================================================		
+//		System.out.println(carroService.getCarRating("66-666-66")); 	
 //=============================================================		
 //		carroService.getCarComments("66-666-66")
 //		.forEach(System.out::println);
@@ -127,7 +183,7 @@ public class CarroApplication implements CommandLineRunner  {
 	}
 }
 //*/
-//==============================================
+//====================================================================================================================
 /*
 package rentcar.carro;
 
@@ -151,8 +207,10 @@ public class CarroApplication implements CommandLineRunner  {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Location location6 = new Location("city66", "street6", 6);
+		Location location6 = new Location("city6", "street6", 6);
 		Location location7 = new Location("city7", "street7", 7);
+		Location location62 = new Location("city6", "street62", 62);
+		Location location72 = new Location("city7", "street72", 72);
 		
 		String[] image6 = new String[] {
 				"https://d1zgdcrdir5wgt.cloudfront.net/media/vehicle/images/b0r3mfIkQlGJwrSJabE8cg.1440x700.jpg",
@@ -166,13 +224,14 @@ public class CarroApplication implements CommandLineRunner  {
 		String[] features6 = {"Reverse Camera", "Touch Screen Menu", "Side Camera"}; 
 		String[] features7 = {"Super", "Puper", "Features"}; 
 
-		CarDto car6 = CarDto.builder()
-				.regNumber("66-666-66")  
-				.owner("666@gmail.com")  
+//		CarDto car6 = CarDto.builder()
+		CarDto car62 = CarDto.builder()
+				.regNumber("62-666-62")  
+				.owner("6262@gmail.com")  
 				.hostCity("city6")       
-				.location(location6)     
+				.location(location62)     
 				.make("maker6")          
-				.model("model6")         
+				.model("model62")         
 				.year(2011)               
 				.engine("1.6L")
 				.fuel("gas")
@@ -180,21 +239,22 @@ public class CarroApplication implements CommandLineRunner  {
 				.wheelsDrive("TWD")
 				.doors(4)
 				.seats(5)
-				.carClass("A")
+				.carClass("B")
 				.fuelConsumption(12.5)
 				.features(features6)         
-				.dayPrice(38)               
+				.dayPrice(32)               
 				.distanceIncluded(0.45)
 				.imageUrl(image6)			
 				.build();
 		
-		CarDto car7 = CarDto.builder()
-				.regNumber("77-777-77")  
-				.owner("777@gmail.com")  
+//		CarDto car7 = CarDto.builder()
+		CarDto car72 = CarDto.builder()
+				.regNumber("72-777-72")  
+				.owner("7272@gmail.com")  
 				.hostCity("city7")       
-				.location(location7)     
+				.location(location72)     
 				.make("maker7")          
-				.model("model7")         
+				.model("model72")         
 				.year(2011)               
 				.engine("1.6L")
 				.fuel("gas")
@@ -202,10 +262,10 @@ public class CarroApplication implements CommandLineRunner  {
 				.wheelsDrive("TWD")
 				.doors(4)
 				.seats(5)
-				.carClass("A")
+				.carClass("C")
 				.fuelConsumption(12.5)
 				.features(features7)         
-				.dayPrice(49)               
+				.dayPrice(54)               
 				.distanceIncluded(0.45)
 				.imageUrl(image7)			
 				.build();
@@ -219,10 +279,10 @@ public class CarroApplication implements CommandLineRunner  {
 //				.dayPrice(66)
 //				.build();
 		
-		Car res = carroService.addCar(car6);	
+		Car res = carroService.addCar(car62);	
 		System.out.println(res);
 		
-		res = carroService.addCar(car7);	
+		res = carroService.addCar(car72);	
 		System.out.println(res);
 		
 //		Car res = carroService.updateCar(car);	

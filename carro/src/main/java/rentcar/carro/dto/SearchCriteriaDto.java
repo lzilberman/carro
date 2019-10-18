@@ -1,6 +1,7 @@
 package rentcar.carro.dto;
 
 import lombok.*;
+import org.springframework.data.domain.Sort.Direction;;
 
 @NoArgsConstructor
 @Setter
@@ -21,10 +22,10 @@ public class SearchCriteriaDto {
 	// often
 	String country;
 	    //range
-	Integer minAmount;
-	Integer maxAmount;
-	    //
-	String  sortOrder;
+	Integer minPrice;
+	Integer maxPrice;
+	Direction sortByPriceDirection;
+	    
 	// optional
 	String  make;
 	String  model;
@@ -39,6 +40,6 @@ public class SearchCriteriaDto {
 	String  transmission;
 	String  wheelsDrive;
 	    //range
-	String minFuelConsumption;
-	String maxFuelConsumption;
+	Double minFuelConsumption;
+	Double maxFuelConsumption;
 }
